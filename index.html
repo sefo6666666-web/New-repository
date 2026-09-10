@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seif Ahmed — Brand & Creative Designer</title>
+<link rel="icon" href="images/logo_mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070a16;
+    --bg-deep:#04060d;
+    --panel:#0e1730;
+    --panel-2:#101a36;
+    --line: rgba(160,190,230,0.14);
+    --ink:#eef1f8;
+    --muted:#93a3c2;
+    --muted-2:#6d7ea1;
+    --gold:#f0a83f;
+    --gold-soft: rgba(240,168,63,0.85);
+    --blue-glow: rgba(120,170,230,0.55);
+    --shadow: 0 30px 80px rgba(0,0,0,0.55);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+
+  h1,h2,h3,.mark-font{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    letter-spacing:-0.01em;
+    margin:0;
+    font-weight:600;
+  }
+
+  .container{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  ::selection{ background: var(--gold); color:#1a1204; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Background texture ---------- */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(60% 45% at 18% 8%, rgba(90,130,190,0.16), transparent 60%),
+      radial-gradient(50% 40% at 85% 12%, rgba(240,168,63,0.07), transparent 60%),
+      radial-gradient(70% 50% at 50% 100%, rgba(70,100,160,0.14), transparent 60%),
+      linear-gradient(180deg, rgba(4,6,13,0.5), rgba(4,6,13,0.68) 55%, rgba(4,6,13,0.82)),
+      url('images/texture-bg.jpg');
+    background-size:auto, auto, auto, auto, cover;
+    background-position:center, center, center, center, center top;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    pointer-events:none;
+    z-index:0;
+  }
+  /* Give most sections a transparent backdrop so the fixed texture reads through;
+     cards/panels below keep their own solid backgrounds for text contrast. */
+  section{ background:transparent; }
+
+  /* ---------- Nav ---------- */
+  header.site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:flex-end;
+    padding:16px 40px;
+    background:rgba(6,9,20,0.55);
+    backdrop-filter: blur(14px);
+    border-bottom:1px solid transparent;
+    transition: border-color .4s ease, background .4s ease, padding .4s ease;
+  }
+  header.site-nav.scrolled{
+    border-bottom-color:var(--line);
+    background:rgba(5,8,17,0.86);
+    padding:11px 40px;
+  }
+  .brand-lockup{
+    display:flex; align-items:center; gap:12px;
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  }
+  .brand-lockup img{ width:32px; height:32px; filter:drop-shadow(0 0 6px rgba(150,190,255,0.5)); }
+  .brand-lockup span{
+    font-family:'Space Grotesk', sans-serif; font-size:15px; letter-spacing:0.16em; color:var(--ink);
+  }
+  nav.links{ display:flex; gap:34px; }
+  nav.links a{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    color:var(--muted);
+    position:relative;
+    padding-bottom:4px;
+    transition:color .3s ease;
+  }
+  nav.links a::after{
+    content:""; position:absolute; left:0; right:100%; bottom:0; height:1px;
+    background:var(--gold); transition:right .35s ease;
+  }
+  nav.links a:hover, nav.links a.active{ color:var(--ink); }
+  nav.links a:hover::after, nav.links a.active::after{ right:0; }
+
+  .nav-toggle{ display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px;}
+  .nav-toggle span{ width:22px; height:1.5px; background:var(--ink); display:block; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:flex-end;
+    overflow:hidden;
+  }
+  .hero img.hero-bg{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    object-position: 62% 30%;
+    transform: scale(1.06);
+    opacity:0;
+    animation: heroReveal 2.2s cubic-bezier(.19,1,.22,1) forwards;
+  }
+  @keyframes heroReveal{
+    0%{ opacity:0; transform:scale(1.12); filter:brightness(0.6) blur(6px); }
+    100%{ opacity:1; transform:scale(1.02); filter:brightness(0.82) blur(0); }
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(4,6,13,0.96) 0%, rgba(4,6,13,0.35) 46%, rgba(4,6,13,0.55) 100%);
+  }
+  .hero-content{
+    position:relative; z-index:2;
+    padding:52px 56px 64px;
+    margin:0 0 60px 40px;
+    max-width:720px;
+    isolation:isolate;
+    opacity:0;
+    animation: heroText 1.4s ease .9s forwards;
+  }
+  .hero-content::before{
+    content:"";
+    position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(150deg, rgba(6,9,18,0.9), rgba(6,9,18,0.62) 75%);
+    border-radius:180px 36px 36px 36px;
+    border:1px solid rgba(240,168,63,0.14);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);
+  }
+  @media (max-width:640px){
+    .hero-content{ padding:52px 28px 46px 40px; margin-left:16px; margin-right:16px; }
+    .hero-content::before{ border-radius:48px 24px 24px 24px; }
+  }
+  @keyframes heroText{
+    from{ opacity:0; transform:translateY(22px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .hero-eyebrow{
+    font-family:'Space Grotesk', sans-serif; font-size:13px; letter-spacing:0.32em;
+    color:var(--gold); margin-bottom:18px; text-transform:uppercase;
+  }
+  .hero h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:clamp(34px, 5.8vw, 72px);
+    line-height:1.12;
+    letter-spacing:-0.01em;
+    color:#f6f8fc;
+    text-shadow: 0 0 34px rgba(150,190,255,0.35);
+  }
+  .hero p.tagline{
+    margin-top:22px;
+    font-size:22px;
+    font-style:italic;
+    color:var(--muted);
+    max-width:480px;
+  }
+  .hero p.tagline b{ color:var(--gold-soft); font-weight:500; }
+  .hero-status{
+    display:inline-flex; align-items:center; gap:9px; margin-top:26px;
+    font-family:'Space Grotesk', sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--muted);
+    border:1px solid var(--line); padding:9px 18px; border-radius:30px; background:rgba(6,9,20,0.35);
+  }
+  .hero-status .dot{
+    width:7px; height:7px; border-radius:50%; background:#7ee89a; box-shadow:0 0 8px 1px rgba(126,232,154,0.7);
+    animation: statusPulse 2.2s ease-in-out infinite;
+  }
+  @keyframes statusPulse{ 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
+  .hero-cta{ display:flex; flex-wrap:wrap; gap:16px; margin-top:32px; }
+  .btn-primary, .btn-ghost{
+    display:inline-block; font-family:'Space Grotesk', sans-serif; font-size:11.5px; letter-spacing:0.14em;
+    padding:16px 30px; border-radius:2px; transition: all .35s ease;
+  }
+  .btn-primary{ background:var(--gold); color:#1a1204; }
+  .btn-primary:hover{ background:#f6bd63; transform:translateY(-2px); }
+  .btn-ghost{ border:1px solid var(--line); color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--gold-soft); color:var(--gold-soft); transform:translateY(-2px); }
+  .hero-signature{
+    display:block; margin-top:30px; font-family:'Cormorant Garamond'; font-style:italic;
+    font-size:16px; color:var(--muted-2);
+  }
+
+  .scroll-cue{
+    position:absolute; left:40px; bottom:36px; z-index:2;
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Grotesk', sans-serif; font-size:10.5px; letter-spacing:0.24em; color:var(--muted-2);
+    opacity:0; animation: heroText 1.2s ease 1.8s forwards;
+  }
+  .scroll-cue .line{ width:34px; height:1px; background:var(--muted-2); position:relative; overflow:hidden; }
+  .scroll-cue .line::after{
+    content:""; position:absolute; left:-100%; top:0; bottom:0; width:100%;
+    background:var(--gold); animation: cueSweep 2.6s ease-in-out infinite;
+  }
+  @keyframes cueSweep{ 0%{left:-100%;} 50%{left:100%;} 100%{left:100%;} }
+
+  /* ---------- Intro reel: opposite-direction marquee ---------- */
+  .intro-reel{ padding:100px 0 110px; overflow:hidden; }
+  .intro-reel .eyebrow-title{ margin-bottom:54px; }
+  .reel-row{
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  }
+  .reel-row + .reel-row{ margin-top:20px; }
+  .reel-track{
+    display:flex; gap:20px; width:max-content;
+    will-change:transform;
+  }
+  .reel-row-1 .reel-track{ animation:reelRight 20s linear infinite; }
+  .reel-row-2 .reel-track{ animation:reelLeft 24s linear infinite; }
+  .reel-row:hover .reel-track{ animation-play-state:paused; }
+  @keyframes reelRight{ from{ transform:translateX(-50%); } to{ transform:translateX(0); } }
+  @keyframes reelLeft{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  .reel-item{
+    position:relative; flex:0 0 auto; width:190px; aspect-ratio:4/5;
+    overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow);
+    background:var(--panel);
+  }
+  .reel-item img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  @media (max-width:720px){
+    .reel-item{ width:132px; }
+    .reel-row + .reel-row{ margin-top:14px; }
+  }
+
+  /* ---------- Sections generic ---------- */
+  section{ position:relative; z-index:1; padding:130px 0; }
+  .section-tight{ padding:70px 0; }
+
+  .eyebrow-title{
+    text-align:center; margin-bottom:70px;
+  }
+  .eyebrow-title .kicker{
+    font-family:'Space Grotesk', sans-serif; font-size:11.5px; letter-spacing:0.34em; color:var(--gold);
+    display:block; margin-bottom:14px;
+  }
+  .eyebrow-title h2{
+    font-size:clamp(30px,4vw,46px);
+    color:#f2f5fb;
+    text-shadow:0 0 26px rgba(140,180,255,0.25);
+  }
+
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .9s cubic-bezier(.19,1,.22,1), transform .9s cubic-bezier(.19,1,.22,1); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  .reveal-delay-1.in-view{ transition-delay:.12s; }
+  .reveal-delay-2.in-view{ transition-delay:.24s; }
+  .reveal-delay-3.in-view{ transition-delay:.36s; }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid; grid-template-columns: 1.05fr 1fr; gap:60px; align-items:center;
+  }
+  .about-portrait{
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    padding:0;
+    min-height:640px;
+    overflow:hidden;
+  }
+  .about-portrait::before{
+    content:"";
+    position:absolute;
+    top:50%; left:50%;
+    width:92%; aspect-ratio:1/1;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    border:2px solid rgba(232,238,250,0.85);
+    -webkit-mask-image:linear-gradient(118deg, #000 52%, transparent 76%);
+    mask-image:linear-gradient(118deg, #000 52%, transparent 76%);
+    box-shadow:0 0 90px 8px rgba(90,130,190,0.32);
+    z-index:0;
+  }
+  .about-portrait::after{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse 70% 70% at 50% 38%, rgba(90,130,190,0.30), transparent 72%);
+    z-index:0;
+  }
+  .about-portrait img{
+    position:relative; z-index:1;
+    display:block; width:104%; max-width:none; height:auto; margin:0 auto;
+    filter:saturate(1.05) contrast(1.02) drop-shadow(0 30px 50px rgba(0,0,0,0.55));
+    will-change:transform;
+  }
+  @media (max-width:920px){
+    .about-portrait{ min-height:460px; }
+    .about-portrait img{ width:92%; }
+  }
+  .about-copy .kicker{
+    font-family:'Space Grotesk', sans-serif; font-size:11.5px; letter-spacing:0.3em; color:var(--gold); display:block; margin-bottom:16px;
+  }
+  .about-copy h2{ font-size:clamp(28px,3.4vw,40px); margin-bottom:26px; color:#f2f5fb; }
+  .about-copy p{ color:var(--muted); font-size:20px; margin:0 0 18px; }
+  .about-copy .lede{ color:var(--ink); font-size:22px; }
+  .about-copy .lede b{ color:var(--gold-soft); font-weight:600; }
+  .about-copy .signoff{
+    margin-top:26px; font-family:'Space Grotesk', sans-serif; font-size:15px; letter-spacing:0.12em; color:var(--gold);
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:26px; margin-top:34px;
+    padding-top:28px; border-top:1px solid var(--line);
+  }
+  .meta-row div{ font-size:15px; color:var(--muted-2); }
+  .meta-row span{ display:block; font-family:'Space Grotesk', sans-serif; font-size:10px; letter-spacing:0.16em; color:var(--gold); margin-bottom:6px; }
+
+  /* ---------- Chips / experience ---------- */
+  .skills-wrap{ display:grid; grid-template-columns: 1fr 1fr; gap:60px; margin-top:10px; }
+  .chip-group h3{
+    font-size:13px; letter-spacing:0.16em; color:var(--gold); margin-bottom:18px; font-family:'Space Grotesk', sans-serif;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chips span{
+    border:1px solid var(--line); padding:8px 16px; border-radius:30px;
+    font-size:15px; color:var(--muted); font-family:'Cormorant Garamond';
+    transition: border-color .3s ease, color .3s ease;
+  }
+  .chips span:hover{ border-color:var(--gold-soft); color:var(--ink); }
+
+  .timeline{ margin-top:60px; }
+  .tl-item{
+    display:grid; grid-template-columns: 190px 1fr; gap:26px;
+    padding:22px 0; border-top:1px solid var(--line);
+  }
+  .tl-item:last-child{ border-bottom:1px solid var(--line); }
+  .tl-item .when{ font-family:'Space Grotesk', sans-serif; font-size:12px; letter-spacing:0.08em; color:var(--muted-2); padding-top:3px; }
+  .tl-item .role{ font-size:21px; color:var(--ink); }
+  .tl-item .co{ color:var(--gold-soft); font-style:italic; font-size:18px; }
+
+  /* ---------- Project boards ---------- */
+  .project-row{
+    display:grid; grid-template-columns: 0.86fr 1.14fr; gap:56px; align-items:center;
+    padding:64px 0;
+    border-top:1px solid var(--line);
+  }
+  .project-row:last-child{ border-bottom:1px solid var(--line); }
+  .project-row.flip{ grid-template-columns: 1.14fr 0.86fr; }
+  .project-row.flip .project-copy{ order:2; }
+  .project-row.flip .project-figure{ order:1; }
+  .project-figure{
+    position:relative; overflow:hidden; border:1px solid var(--line);
+    box-shadow:var(--shadow);
+  }
+  .project-figure img{ transition: transform .9s cubic-bezier(.19,1,.22,1); }
+  .project-figure:hover img{ transform:scale(1.035); }
+  .project-copy .num{ font-family:'Space Grotesk', sans-serif; color:var(--gold); font-size:12px; letter-spacing:0.2em; margin-bottom:14px; }
+  .project-copy h3{ font-size:clamp(24px,3vw,34px); color:#f2f5fb; margin-bottom:14px; }
+  .project-copy p{ color:var(--muted); font-size:19px; }
+  .project-copy .tags{ margin-top:20px; display:flex; gap:10px; flex-wrap:wrap; }
+  .project-copy .tags span{ font-size:12.5px; letter-spacing:0.06em; color:var(--muted-2); border:1px solid var(--line); padding:5px 12px; border-radius:20px; }
+
+  /* ---------- Process reveal (photo manipulation) ---------- */
+  .manip-grid{ display:flex; flex-direction:column; gap:64px; }
+  .manip-item{ display:grid; grid-template-columns: 1fr; gap:20px; }
+  .manip-stage{
+    position:relative; border:1px solid var(--line); box-shadow:var(--shadow); overflow:hidden;
+    aspect-ratio: 1170 / 827;
+  }
+  .manip-stage img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    transition: opacity .8s ease;
+  }
+  .manip-stage img.concept{ opacity:0; }
+  .manip-stage.show-concept img.final{ opacity:0; }
+  .manip-stage.show-concept img.concept{ opacity:1; }
+  .manip-caption{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+  }
+  .manip-caption h3{ font-size:24px; color:#f2f5fb; }
+  .manip-toggle{
+    font-family:'Space Grotesk', sans-serif; font-size:11px; letter-spacing:0.14em; color:var(--gold);
+    border:1px solid var(--gold-soft); background:transparent; padding:10px 20px; border-radius:30px;
+    cursor:pointer; transition: background .3s ease, color .3s ease;
+  }
+  .manip-toggle:hover{ background:var(--gold); color:#1a1204; }
+  .stage-label{
+    position:absolute; top:18px; left:18px; z-index:3;
+    font-family:'Space Grotesk', sans-serif; font-size:10.5px; letter-spacing:0.18em; color:#fff;
+    background:rgba(6,9,20,0.55); padding:7px 14px; backdrop-filter:blur(6px);
+    border:1px solid var(--line);
+  }
+
+  /* ---------- Before/after grid ---------- */
+  .ba-grid{ display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+  .ba-card{ border:1px solid var(--line); overflow:hidden; box-shadow:var(--shadow); position:relative; }
+  .ba-card figcaption{
+    padding:16px 20px; display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid var(--line); background:var(--panel);
+  }
+  .ba-card figcaption .handle{ font-family:'Space Grotesk', sans-serif; font-size:13px; letter-spacing:0.05em; color:var(--ink); }
+  .ba-card figcaption .tag{ font-size:12px; color:var(--gold-soft); letter-spacing:0.05em; }
+  .ba-card img{ transition: transform .8s cubic-bezier(.19,1,.22,1); }
+  .ba-card:hover img{ transform:scale(1.03); }
+
+  /* ---------- Statement band ---------- */
+  .statement{
+    position:relative; padding:180px 0; text-align:center; overflow:hidden;
+  }
+  .statement img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:70% 40%;
+  }
+  .statement::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(4,6,13,0.94), rgba(4,6,13,0.72));
+  }
+  .statement blockquote{
+    position:relative; z-index:2; max-width:820px; margin:0 auto; padding:0 30px;
+    font-size:clamp(22px,2.6vw,30px); font-style:italic; color:#f2f5fb; line-height:1.55;
+  }
+  .statement blockquote b{ color:var(--gold-soft); font-weight:600; font-style:normal; }
+  .statement cite{
+    display:block; margin-top:30px; font-family:'Space Grotesk', sans-serif; font-style:normal;
+    font-size:11.5px; letter-spacing:0.24em; color:var(--muted-2);
+  }
+
+  /* ---------- Social grid ---------- */
+  .social-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:30px;
+  }
+  .social-card{
+    position:relative; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow);
+    aspect-ratio: 1170/827;
+  }
+  .social-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .8s cubic-bezier(.19,1,.22,1); }
+  .social-card:hover img{ transform:scale(1.06); }
+  .social-card .label{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding:16px 18px 14px; background:linear-gradient(0deg, rgba(4,6,13,0.92), transparent);
+    transform:translateY(8px); opacity:0.85; transition:transform .4s ease, opacity .4s ease;
+  }
+  .social-card:hover .label{ transform:translateY(0); opacity:1; }
+  .social-card .label h4{ font-family:'Space Grotesk', sans-serif; font-size:14px; letter-spacing:0.04em; color:#fff; margin:0 0 3px; }
+  .social-card .label span{ font-size:13px; color:var(--muted); }
+
+  /* ---------- Services ---------- */
+  .services-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); border:1px solid var(--line); }
+  .service-card{ background:var(--bg); padding:40px 34px; }
+  .service-card .s-num{ font-family:'Space Grotesk', sans-serif; font-size:12px; letter-spacing:0.16em; color:var(--gold); display:block; margin-bottom:16px; }
+  .service-card h3{ font-size:22px; color:#f2f5fb; margin-bottom:12px; }
+  .service-card p{ color:var(--muted); font-size:17px; margin:0; }
+
+  .why-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:40px; margin-top:110px; }
+  .why-item h3{ font-family:'Space Grotesk', sans-serif; font-size:14px; letter-spacing:0.1em; color:var(--gold-soft); margin-bottom:12px; }
+  .why-item p{ color:var(--muted); font-size:17px; margin:0; }
+
+  @media (max-width:920px){
+    .services-grid{ grid-template-columns:1fr 1fr; }
+    .why-grid{ grid-template-columns:1fr 1fr; gap:32px; }
+  }
+  @media (max-width:600px){
+    .services-grid{ grid-template-columns:1fr; }
+    .why-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- KPI dashboard ---------- */
+  .kpi-dash{
+    display:grid; grid-template-columns: 1fr 1.15fr; gap:2px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .kpi-feature{
+    background:var(--panel); padding:56px 48px; display:flex; align-items:center; gap:40px;
+  }
+  .kpi-ring{
+    position:relative; width:168px; height:168px; flex:0 0 auto; border-radius:50%;
+    background:conic-gradient(var(--gold) calc(var(--pct,0) * 1%), rgba(160,190,230,0.12) 0);
+    display:flex; align-items:center; justify-content:center;
+    transition: background 1.4s cubic-bezier(.19,1,.22,1);
+  }
+  .kpi-ring::before{
+    content:""; position:absolute; inset:12px; border-radius:50%; background:var(--panel);
+  }
+  .kpi-ring-value{
+    position:relative; z-index:2; font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-size:34px; color:var(--ink);
+  }
+  .kpi-ring-value::after{ content:"%"; font-size:19px; color:var(--gold-soft); }
+  .kpi-feature-copy .kicker{
+    font-family:'Space Grotesk', sans-serif; font-size:11px; letter-spacing:0.28em; color:var(--gold);
+    display:block; margin-bottom:12px;
+  }
+  .kpi-feature-copy h3{ font-size:24px; color:#f2f5fb; margin-bottom:10px; }
+  .kpi-feature-copy p{ color:var(--muted); font-size:17px; margin:0; }
+  .kpi-side{
+    background:var(--panel); display:grid; grid-template-columns:1fr 1fr; gap:2px;
+  }
+  .kpi-card{
+    background:var(--panel-2); padding:36px 30px; display:flex; flex-direction:column; justify-content:center;
+  }
+  .kpi-number{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(34px,3.6vw,46px);
+    color:var(--gold-soft); line-height:1;
+  }
+  .kpi-number::after{ content:attr(data-suffix); }
+  .kpi-label{ margin-top:10px; color:var(--muted); font-size:15px; letter-spacing:0.02em; }
+  @media (max-width:860px){
+    .kpi-dash{ grid-template-columns:1fr; }
+    .kpi-feature{ flex-direction:column; text-align:center; padding:44px 30px; }
+  }
+  @media (max-width:520px){
+    .kpi-side{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- Full presentation decks ---------- */
+  .deck-grid{ display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+  .deck-card{ border:1px solid var(--line); box-shadow:var(--shadow); overflow:hidden; background:var(--panel); }
+  .deck-preview{ height:420px; overflow:hidden; position:relative; }
+  .deck-preview img{ width:100%; height:100%; object-fit:cover; object-position:top; transition:transform .8s cubic-bezier(.19,1,.22,1); }
+  .deck-card:hover .deck-preview img{ transform:scale(1.04); }
+  .deck-caption{ padding:26px 28px 32px; }
+  .deck-caption h3{ font-size:24px; color:#f2f5fb; margin-bottom:6px; }
+  .deck-caption span{ display:block; color:var(--muted-2); font-size:14px; margin-bottom:20px; }
+  .deck-open{
+    font-family:'Space Grotesk', sans-serif; font-size:11px; letter-spacing:0.14em; color:var(--gold);
+    border:1px solid var(--gold-soft); background:transparent; padding:12px 22px; border-radius:30px;
+    cursor:pointer; transition: background .3s ease, color .3s ease;
+  }
+  .deck-open:hover{ background:var(--gold); color:#1a1204; }
+
+  .deck-viewer{
+    position:fixed; inset:0; z-index:280; background:rgba(4,6,13,0.97); backdrop-filter:blur(6px);
+    opacity:0; pointer-events:none; transition:opacity .35s ease; overflow-y:auto;
+  }
+  .deck-viewer.open{ opacity:1; pointer-events:auto; }
+  .deck-viewer-scroll{ max-width:900px; margin:80px auto; display:flex; flex-direction:column; gap:2px; padding:0 20px; }
+  .deck-viewer-scroll img{ width:100%; display:block; }
+  .deck-viewer-close{
+    position:fixed; top:26px; right:30px; width:46px; height:46px; border-radius:50%;
+    border:1px solid var(--line); background:rgba(10,14,26,0.7); color:#fff; font-size:20px;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:281;
+    transition:border-color .3s ease, color .3s ease;
+  }
+  .deck-viewer-close:hover{ border-color:var(--gold-soft); color:var(--gold); }
+
+  @media (max-width:920px){
+    .deck-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width:600px){
+    .deck-preview{ height:300px; }
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    position:relative; padding:150px 0 60px; text-align:center; overflow:hidden;
+    border-top:1px solid var(--line);
+  }
+  footer .mark{ width:54px; height:54px; margin:0 auto 34px; filter:drop-shadow(0 0 12px rgba(150,190,255,0.5)); }
+  footer h2{
+    font-size:clamp(28px,4vw,46px); color:#f2f5fb; margin-bottom:6px;
+  }
+  footer .gold-line{ color:var(--gold); font-family:'Space Grotesk', sans-serif; font-size:15px; letter-spacing:0.18em; margin-bottom:50px; display:block; }
+  .contact-links{ display:flex; justify-content:center; flex-wrap:wrap; gap:16px; margin-bottom:70px; }
+  .contact-links a{
+    font-family:'Space Grotesk', sans-serif; font-size:12px; letter-spacing:0.1em; color:var(--muted);
+    border:1px solid var(--line); padding:14px 26px; border-radius:30px;
+    transition: border-color .3s ease, color .3s ease, background .3s ease;
+  }
+  .contact-links a:hover{ border-color:var(--gold-soft); color:#1a1204; background:var(--gold); }
+  footer .fine{ color:var(--muted-2); font-size:14px; }
+  footer .fine a{ color:var(--muted); border-bottom:1px solid var(--line); }
+
+  .contact-form{ max-width:640px; margin:0 auto 50px; text-align:left; }
+  .cf-row{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .cf-field{ margin-bottom:20px; }
+  .cf-field label{ display:block; font-family:'Space Grotesk', sans-serif; font-size:10.5px; letter-spacing:0.14em; color:var(--gold-soft); margin-bottom:8px; }
+  .cf-field input, .cf-field textarea{
+    width:100%; background:var(--panel); border:1px solid var(--line); color:var(--ink);
+    font-family:'Cormorant Garamond'; font-size:17px; padding:12px 14px; border-radius:2px; resize:vertical;
+  }
+  .cf-field input:focus, .cf-field textarea:focus{ outline:none; border-color:var(--gold-soft); }
+  .cf-note{ font-size:13px; color:var(--muted-2); margin-top:14px; }
+  @media (max-width:600px){ .cf-row{ grid-template-columns:1fr; } }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:920px){
+    .about-grid, .skills-wrap{ grid-template-columns:1fr; gap:40px; }
+    .project-row, .project-row.flip{ grid-template-columns:1fr; }
+    .project-row.flip .project-copy, .project-row.flip .project-figure{ order:initial; }
+    .ba-grid{ grid-template-columns:1fr; }
+    .social-grid{ grid-template-columns:1fr 1fr; }
+    nav.links{ display:none; }
+    .nav-toggle{ display:flex; }
+  }
+  @media (max-width:600px){
+    .container{ padding:0 22px; }
+    section{ padding:90px 0; }
+    .social-grid{ grid-template-columns:1fr; }
+    .tl-item{ grid-template-columns:1fr; gap:6px; }
+    header.site-nav{ padding:14px 20px; }
+  }
+
+  /* mobile nav panel */
+  .mobile-panel{
+    position:fixed; inset:0; z-index:99; background:rgba(4,6,13,0.98);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:30px;
+    transform:translateY(-100%); transition:transform .5s cubic-bezier(.19,1,.22,1);
+  }
+  .mobile-panel.open{ transform:translateY(0); }
+  .mobile-panel a{ font-family:'Space Grotesk', sans-serif; font-size:20px; letter-spacing:0.14em; color:var(--ink); }
+
+  /* ---------- Intro splash: curtain wipe + masked wordmark reveal ---------- */
+  .splash{
+    position:fixed; inset:0; z-index:300;
+    background:var(--bg-deep);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .splash.skip{ animation:none; display:none; }
+
+  .splash-curtain{
+    position:absolute; top:0; bottom:0; width:51%; z-index:2;
+    background:
+      radial-gradient(120% 140% at 50% 50%, rgba(90,130,190,0.14), transparent 60%),
+      var(--bg-deep);
+  }
+  .splash-curtain.cl{ left:0; border-right:1px solid var(--line); animation-name: curtainOpenLeft; }
+  .splash-curtain.cr{ right:0; border-left:1px solid var(--line); animation-name: curtainOpenRight; }
+  .splash-curtain.cl, .splash-curtain.cr{
+    animation-duration: 3.1s; animation-timing-function: cubic-bezier(.76,0,.16,1); animation-fill-mode:forwards;
+  }
+  @keyframes curtainOpenLeft{
+    0%,72%{ transform:translateX(0); }
+    100%{ transform:translateX(-100%); }
+  }
+  @keyframes curtainOpenRight{
+    0%,72%{ transform:translateX(0); }
+    100%{ transform:translateX(100%); }
+  }
+
+  .splash-center{
+    position:relative; z-index:3; display:flex; flex-direction:column; align-items:center;
+    animation: splashCenterOut .7s cubic-bezier(.7,0,.2,1) 2.15s forwards;
+  }
+  @keyframes splashCenterOut{
+    to{ opacity:0; transform:translateY(-16px) scale(.97); }
+  }
+  .splash-word-line{ overflow:hidden; }
+  .splash-word-line .sw-text{
+    display:block; font-family:'Space Grotesk', sans-serif; font-weight:600;
+    font-size:clamp(34px, 6vw, 62px); line-height:1.08; letter-spacing:0.05em;
+    color:#f3f6fc;
+    transform:translateY(112%);
+    animation: swReveal 1s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  .splash-word-line:nth-child(2) .sw-text{ color:var(--gold-soft); animation-delay:.12s; }
+  @keyframes swReveal{ to{ transform:translateY(0); } }
+
+  .splash-logo{
+    width:clamp(150px, 22vw, 220px);
+    opacity:0; transform:scale(.88);
+    animation: splashLogoIn 1.15s cubic-bezier(.16,1,.3,1) .1s forwards;
+    filter:drop-shadow(0 0 26px rgba(150,190,255,0.28));
+  }
+  .splash-logo img{ width:100%; }
+  @keyframes splashLogoIn{ to{ opacity:1; transform:scale(1); } }
+
+  .splash-role{
+    margin-top:20px; font-family:'Space Grotesk', sans-serif; font-size:11px; letter-spacing:0.36em; color:var(--muted-2);
+    opacity:0; animation: splashFadeIn .8s ease .85s forwards;
+  }
+  .splash-progress{
+    margin-top:30px; width:160px; height:1px; background:rgba(160,190,230,0.16); position:relative; overflow:hidden;
+    opacity:0; animation: splashFadeIn .5s ease .55s forwards;
+  }
+  .splash-progress-fill{
+    position:absolute; left:0; top:0; bottom:0; width:0%;
+    background:linear-gradient(90deg, var(--gold-soft), var(--gold));
+    animation: splashProgress 1.5s cubic-bezier(.65,0,.35,1) .6s forwards;
+  }
+  @keyframes splashProgress{ to{ width:100%; } }
+  @keyframes splashFadeIn{ to{ opacity:1; } }
+
+  .no-scroll{ overflow:hidden; height:100%; }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{
+    position:fixed; inset:0; z-index:250; background:rgba(4,6,13,0.93); backdrop-filter:blur(8px);
+    display:flex; align-items:center; justify-content:center; padding:50px;
+    opacity:0; pointer-events:none; transition:opacity .4s ease;
+  }
+  .lightbox.open{ opacity:1; pointer-events:auto; }
+  .lightbox img{
+    max-width:92vw; max-height:88vh; box-shadow:0 40px 100px rgba(0,0,0,0.65);
+    transform:scale(.9); transition:transform .45s cubic-bezier(.19,1,.22,1);
+    border:1px solid var(--line);
+  }
+  .lightbox.open img{ transform:scale(1); }
+  .lightbox-close{
+    position:absolute; top:26px; right:30px; width:46px; height:46px; border-radius:50%;
+    border:1px solid var(--line); background:rgba(10,14,26,0.7); color:#fff; font-size:20px;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; line-height:1;
+    transition:border-color .3s ease, color .3s ease;
+  }
+  .lightbox-close:hover{ border-color:var(--gold-soft); color:var(--gold); }
+
+  /* ---------- Zoomable hover hint ---------- */
+  .zoomable{ cursor:zoom-in; }
+  .zoom-hint{
+    position:absolute; inset:0; z-index:5; display:flex; align-items:center; justify-content:center;
+    background:rgba(4,6,13,0); opacity:0; transition:opacity .35s ease, background .35s ease;
+  }
+  .zoomable:hover .zoom-hint{ opacity:1; background:rgba(4,6,13,0.32); }
+  .zoom-hint span{
+    width:54px; height:54px; border-radius:50%; border:1px solid rgba(255,255,255,0.75);
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:22px;
+    background:rgba(10,14,26,0.45); backdrop-filter:blur(3px);
+    transform:scale(.6); transition:transform .4s cubic-bezier(.19,1,.22,1);
+  }
+  .zoomable:hover .zoom-hint span{ transform:scale(1); }
+
+  @media (prefers-reduced-motion: reduce){
+    .splash{ display:none; }
+  }
+
+  /* ---------- Cursor trail glow ---------- */
+  #cursorGlow{
+    position:fixed; left:0; top:0; width:420px; height:420px; z-index:1; pointer-events:none;
+    background: radial-gradient(circle, rgba(120,170,230,0.10), transparent 65%);
+    transform:translate(-50%,-50%); will-change:transform; transition: opacity .4s ease;
+  }
+  @media (max-width:920px), (hover:none){ #cursorGlow{ display:none; } }
+
+  /* ---------- Tilt-able cards ---------- */
+  .tilt{ transform-style: preserve-3d; will-change:transform; }
+  .tilt img{ transform: translateZ(20px); }
+
+  /* ---------- Magnetic elements ---------- */
+  .magnetic{ display:inline-block; will-change:transform; }
+
+  /* ---------- Behance chip ---------- */
+  .behance-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Space Grotesk', sans-serif; font-size:11px; letter-spacing:0.12em; color:var(--gold-soft);
+    border:1px solid var(--gold-soft); padding:9px 18px; border-radius:30px;
+    margin-top:20px; position:relative; overflow:hidden; transition: color .3s ease, border-color .3s ease;
+  }
+  .behance-link::before{
+    content:""; position:absolute; inset:0; background:var(--gold); transform:translateX(-102%);
+    transition: transform .35s cubic-bezier(.19,1,.22,1); z-index:0;
+  }
+  .behance-link span, .behance-link svg{ position:relative; z-index:1; transition:color .3s ease, stroke .3s ease; }
+  .behance-link:hover{ color:#1a1204; }
+  .behance-link:hover::before{ transform:translateX(0); }
+  .behance-link:hover svg{ stroke:#1a1204; }
+  .behance-link svg{ width:13px; height:13px; stroke:var(--gold-soft); fill:none; stroke-width:1.6; }
+
+  .ba-card figcaption .behance-link, .social-card .behance-link{
+    margin-top:0; padding:6px 14px; font-size:9.5px;
+  }
+  .ba-card figcaption{ flex-wrap:wrap; row-gap:10px; }
+  .social-card .label{ display:flex; flex-direction:column; align-items:flex-start; gap:8px; }
+  .social-bh{
+    position:absolute; top:14px; right:14px; z-index:6; width:32px; height:32px; border-radius:50%;
+    background:rgba(4,6,13,0.55); border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    opacity:0; transform:translateY(-8px); transition:opacity .3s ease, transform .3s ease, border-color .3s ease, background .3s ease;
+    backdrop-filter:blur(4px);
+  }
+  .social-card:hover .social-bh{ opacity:1; transform:translateY(0); }
+  .social-bh svg{ width:14px; height:14px; stroke:var(--gold-soft); fill:none; stroke-width:1.6; }
+  .social-bh:hover{ border-color:var(--gold-soft); background:var(--gold); }
+  .social-bh:hover svg{ stroke:#1a1204; }
+  .manip-caption{ align-items:flex-start; }
+  .manip-caption .behance-link{ margin-top:0; }
+  .manip-actions{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+
+  /* ---------- Extra micro-animations ---------- */
+  .hero-eyebrow{ display:inline-block; }
+  .split-word{ display:inline-block; overflow:hidden; padding:0 2px; margin:0 -2px; }
+  .split-word span{ display:inline-block; transform:translateY(110%); animation: splitUp .9s cubic-bezier(.19,1,.22,1) forwards; }
+  @keyframes splitUp{ to{ transform:translateY(0); } }
+
+  .chips span{ position:relative; }
+  .chips span{ animation: chipFloat 4.5s ease-in-out infinite; }
+  @keyframes chipFloat{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-3px);} }
+
+  .brand-lockup img{ animation: markSpin 9s linear infinite; }
+  @keyframes markSpin{ 0%,92%{ transform:rotate(0deg);} 100%{ transform:rotate(360deg);} }
+
+  .project-figure, .ba-card, .social-card, .manip-stage{ transition: transform .35s ease, box-shadow .35s ease; }
+
+  .scroll-progress{
+    position:fixed; top:0; left:0; height:2px; width:0%; z-index:200;
+    background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+    box-shadow:0 0 10px rgba(240,168,63,0.7);
+    transition: width .1s linear;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .chips span, .brand-lockup img{ animation:none !important; }
+  }
+</style>
+</head>
+<body class="no-scroll">
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div id="cursorGlow"></div>
+
+
+<div class="splash" id="splash">
+  <div class="splash-curtain cl"></div>
+  <div class="splash-curtain cr"></div>
+  <div class="splash-center">
+    <div class="splash-logo"><img src="images/logo_full.png" alt="Seif Ahmed"></div>
+    <div class="splash-progress"><span class="splash-progress-fill"></span></div>
+    <span class="splash-role">Brand &amp; Creative Designer</span>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<header class="site-nav" id="siteNav">
+  <a href="#top" class="brand-lockup">
+    <img src="images/logo_mark.png" alt="Seif Ahmed mark">
+    <span>SEIF AHMED</span>
+  </a>
+  <nav class="links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#social">Social</a>
+    <a href="#results">Results</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+</header>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#social">Social</a>
+  <a href="#results">Results</a>
+  <a href="#services">Services</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<div id="top"></div>
+<section class="hero">
+  <img class="hero-bg" src="images/p01.jpg" alt="Seif Ahmed portrait">
+  <div class="hero-content">
+    <span class="hero-eyebrow">Seif Ahmed</span>
+    <h1><span class="split-word"><span style="animation-delay:.15s">Brand</span></span> <span class="split-word"><span style="animation-delay:.28s">&amp;</span></span><br><span class="split-word"><span style="animation-delay:.4s">Creative</span></span> <span class="split-word"><span style="animation-delay:.52s">Designer.</span></span></h1>
+    <p class="tagline">I build visual identities, campaigns and creative systems that give brands a recognizable point of view.</p>
+    <div class="hero-status"><span class="dot"></span>Available for Full-time · Freelance · Remote Opportunities</div>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary magnetic">View Selected Work</a>
+      <a href="#contact" class="btn-ghost magnetic">Let's Work Together</a>
+    </div>
+    <span class="hero-signature">Every pixel has a reason.</span>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>SCROLL</div>
+</section>
+
+
+<section class="intro-reel">
+  <div class="container">
+    <div class="eyebrow-title reveal">
+      <span class="kicker">Before We Begin</span>
+      <h2>A Look At The Work</h2>
+    </div>
+  </div>
+<div class="reel-row reel-row-1"><div class="reel-track"><div class="reel-item"><img src="images/reel/sm-01.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-02.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-03.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-04.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-05.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-06.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-07.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-08.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-01.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-02.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-03.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-04.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-05.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-06.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-07.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-08.jpg" alt="Social media design" loading="lazy"></div></div></div><div class="reel-row reel-row-2"><div class="reel-track"><div class="reel-item"><img src="images/reel/sm-09.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-10.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-11.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-12.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-13.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-14.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-15.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-09.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-10.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-11.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-12.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-13.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-14.jpg" alt="Social media design" loading="lazy"></div><div class="reel-item"><img src="images/reel/sm-15.jpg" alt="Social media design" loading="lazy"></div></div></div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-portrait reveal">
+        <img src="images/about-statue.png" alt="Seif Ahmed — creative direction, sculpted">
+      </div>
+      <div class="about-copy reveal reveal-delay-1">
+        <span class="kicker">About Me</span>
+        <h2>I Design Brands People Remember.</h2>
+        <p class="lede">I'm <b>Seif Ahmed</b>, a Brand &amp; Creative Designer with 4+ years of agency and freelance experience across branding, advertising, social media, print and visual communication.</p>
+        <p>I work between strategy and execution — turning ideas into visual systems that are clear, distinctive and built to communicate. Whether it's a brand identity, a campaign or a social media presence, I focus on creating work with a clear idea behind every visual decision.</p>
+        <p>Great design is more than aesthetics — it's a tool for communication, emotion and connection. I can think like a creative director, build a brand, shape a campaign and execute the final visual myself.</p>
+        <span class="signoff">Every pixel has a reason.</span>
+        <div class="meta-row">
+          <div><span>Based in</span>Shubra, Cairo, Egypt</div>
+          <div><span>Experience</span>4+ years</div>
+          <div><span>Languages</span>Arabic (Native), English (Good)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-wrap" style="margin-top:110px;">
+      <div class="chip-group reveal">
+        <h3>Expertise</h3>
+        <div class="chips">
+          <span>Branding</span><span>Art Direction</span><span>Advertising</span>
+          <span>Social Media</span><span>Visual Communication</span>
+          <span>Photo Manipulation</span><span>Print</span><span>Motion</span><span>Creative Strategy</span>
+          <span>Typography</span><span>Layout Design</span><span>Presentation Design</span>
+        </div>
+      </div>
+      <div class="chip-group reveal reveal-delay-1">
+        <h3>Software</h3>
+        <div class="chips">
+          <span>Adobe Photoshop</span><span>Adobe Illustrator</span><span>Adobe InDesign</span>
+          <span>Adobe After Effects</span><span>Adobe Premiere Pro</span><span>CapCut</span><span>AI Creative Tools</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="when">Jan 2026 – Jul 2026</div>
+        <div><div class="role">Graphic Designer <span class="co">(Part-time) · B Media</span></div></div>
+      </div>
+      <div class="tl-item">
+        <div class="when">Jan 2026 – Mar 2026</div>
+        <div><div class="role">Graphic Designer <span class="co">(Full-time) · Tarek Nour Communications</span></div></div>
+      </div>
+      <div class="tl-item">
+        <div class="when">Sep 2025 – Feb 2026</div>
+        <div><div class="role">Design Team Lead <span class="co">· OCD Company</span></div></div>
+      </div>
+      <div class="tl-item">
+        <div class="when">Sep 2024 – Aug 2025</div>
+        <div><div class="role">Graphic Designer <span class="co">· Via Advertising Agency</span></div></div>
+      </div>
+      <div class="tl-item">
+        <div class="when">Sep 2023 – Sep 2024</div>
+        <div><div class="role">Graphic Designer <span class="co">· Dr Print</span></div></div>
+      </div>
+      <div class="tl-item">
+        <div class="when">Jan 2023 – Present</div>
+        <div><div class="role">Freelance Graphic Designer <span class="co">· Self-employed</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="work"></div>
+<section id="branding">
+  <div class="container">
+    <div class="eyebrow-title reveal">
+      <span class="kicker">Selected Work</span>
+      <h2>Branding</h2>
+      <p style="max-width:600px; margin:18px auto 0; color:var(--muted); font-size:18px;">A selection of identities, campaigns and visual systems built across different industries.</p>
+    </div>
+
+    <div class="project-row reveal">
+      <div class="project-figure zoomable"><img src="images/p04.jpg" alt="3algny for medical branding"><div class="zoom-hint"><span>⤢</span></div></div>
+      <div class="project-copy">
+        <div class="num">01</div>
+        <h3>3algny — for medical</h3>
+        <p>A full healthcare identity system: logo explorations, wordmarks, app icons, colour palette, editorial posters, service cards, packaging, mobile app UI, and stationery — built around trust, care and easy access to medical service.</p>
+        <div class="tags"><span>Logo &amp; Identity</span><span>Mobile App UI</span><span>Packaging</span><span>Stationery</span></div>
+        <a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>View on Behance</span></a>
+      </div>
+    </div>
+
+    <div class="project-row flip reveal">
+      <div class="project-figure zoomable"><img src="images/p05.jpg" alt="Redmed Tour branding"><div class="zoom-hint"><span>⤢</span></div></div>
+      <div class="project-copy">
+        <div class="num">02</div>
+        <h3>Redmed Tour</h3>
+        <p>Travel and tourism branding built on a warm burgundy and gold palette — logo system, editorial posters, service cards, mobile app UI, boarding pass concept, stationery and merchandise for a brand about journeys that stay with you.</p>
+        <div class="tags"><span>Travel Branding</span><span>Mobile App UI</span><span>Merchandise</span></div>
+        <a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>View on Behance</span></a>
+      </div>
+    </div>
+
+    <div class="project-row reveal">
+      <div class="project-figure zoomable"><img src="images/p06.jpg" alt="Here to Heal branding"><div class="zoom-hint"><span>⤢</span></div></div>
+      <div class="project-copy">
+        <div class="num">03</div>
+        <h3>Here to Heal</h3>
+        <p>A visual identity exploring healing, travel and Egyptian cultural identity through a contemporary visual language. The mark combines Egyptian visual references — an Eye of Horus influence, Ankh symbolism and an H-shaped construction — with organic forms and a calm, earthy palette to build a conceptual medical-tourism identity with a strong point of view.</p>
+        <div class="tags"><span>Medical Tourism</span><span>Egyptian Identity</span><span>Packaging</span><span>Motion Concept</span></div>
+        <a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>View on Behance</span></a>
+      </div>
+    </div>
+
+    <div class="project-row flip reveal">
+      <div class="project-figure zoomable"><img src="images/p07.jpg" alt="Jossee Coffee branding"><div class="zoom-hint"><span>⤢</span></div></div>
+      <div class="project-copy">
+        <div class="num">04</div>
+        <h3>Jossee Coffee</h3>
+        <p>Coffee brand identity "crafted to inspire" — logo marks, packaging for whole-bean bags, cup and signage mockups, mobile app UI, social templates and a motion graphic concept in a warm terracotta and forest palette.</p>
+        <div class="tags"><span>Packaging</span><span>Signage</span><span>Social Templates</span></div>
+        <a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>View on Behance</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="presentations">
+  <div class="container">
+    <div class="eyebrow-title reveal">
+      <span class="kicker">Deep Dive</span>
+      <h2>Full Case Study Presentations</h2>
+      <p style="max-width:600px; margin:18px auto 0; color:var(--muted); font-size:18px;">The complete process decks for two projects — concept, thinking and execution, end to end.</p>
+    </div>
+    <div class="deck-grid">
+      <div class="deck-card reveal">
+        <div class="deck-preview"><img src="images/heal_presentation_1.jpg" alt="Here to Heal full presentation preview"></div>
+        <div class="deck-caption">
+          <h3>Here to Heal</h3>
+          <span>Full Concept &amp; Identity Deck</span>
+          <button class="deck-open magnetic" data-deck="heal">View Full Presentation</button>
+        </div>
+      </div>
+      <div class="deck-card reveal reveal-delay-1">
+        <div class="deck-preview"><img src="images/jossee_presentation_1.jpg" alt="Jossee Coffee full presentation preview"></div>
+        <div class="deck-caption">
+          <h3>Jossee Coffee</h3>
+          <span>Full Brand &amp; Mockup Deck</span>
+          <button class="deck-open magnetic" data-deck="jossee">View Full Presentation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="deck-viewer" id="deckViewer">
+  <button class="deck-viewer-close" id="deckViewerClose" aria-label="Close">&times;</button>
+  <div class="deck-viewer-scroll" id="deckViewerScroll"></div>
+</div>
+
+<section id="manipulation">
+  <div class="container">
+    <div class="eyebrow-title reveal">
+      <span class="kicker">Craft</span>
+      <h2>Visual Art &amp; Photo Manipulation</h2>
+    </div>
+
+    <div class="manip-grid">
+      <div class="manip-item reveal">
+        <div class="manip-stage zoomable" data-stage>
+          <span class="stage-label" data-stage-label>FINAL</span>
+          <img class="final" src="images/p10.jpg" alt="Juhayna Mix Berry composite — final">
+          <img class="concept" src="images/p09.jpg" alt="Juhayna Mix Berry composite — concept">
+          <div class="zoom-hint"><span>⤢</span></div>
+        </div>
+        <div class="manip-caption">
+          <h3>Juhayna Mix Berry — composite</h3>
+          <div class="manip-actions"><button class="manip-toggle" data-toggle>View Concept Stage</button><a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>Behance</span></a></div>
+        </div>
+      </div>
+
+      <div class="manip-item reveal">
+        <div class="manip-stage zoomable" data-stage>
+          <span class="stage-label" data-stage-label>FINAL</span>
+          <img class="final" src="images/p12.jpg" alt="Abandoned house composite — final">
+          <img class="concept" src="images/p11.jpg" alt="Abandoned house composite — concept">
+          <div class="zoom-hint"><span>⤢</span></div>
+        </div>
+        <div class="manip-caption">
+          <h3>The House at Night</h3>
+          <div class="manip-actions"><button class="manip-toggle" data-toggle>View Concept Stage</button><a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>Behance</span></a></div>
+        </div>
+      </div>
+
+      <div class="manip-item reveal">
+        <div class="manip-stage zoomable" data-stage>
+          <span class="stage-label" data-stage-label>FINAL</span>
+          <img class="final" src="images/p14.jpg" alt="Fantasy duel composite — final">
+          <img class="concept" src="images/p13.jpg" alt="Fantasy duel composite — concept">
+          <div class="zoom-hint"><span>⤢</span></div>
+        </div>
+        <div class="manip-caption">
+          <h3>The Duel</h3>
+          <div class="manip-actions"><button class="manip-toggle" data-toggle>View Concept Stage</button><a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>Behance</span></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="direction">
+  <div class="container">
+    <div class="eyebrow-title reveal">
+      <span class="kicker">Before Me / After Me</span>
+      <h2>Visual Direction</h2>
+    </div>
+    <p class="reveal" style="max-width:640px; margin:-30px auto 60px; text-align:center; color:var(--muted); font-size:19px;">Rebuilding Instagram feeds around a clear, consistent brand identity — a defined palette, theme and mood for each account.</p>
+
+    <div class="ba-grid">
+      <figure class="ba-card reveal zoomable">
+        <img src="images/p16.jpg" alt="dr.mai_alhakim before and after"><div class="zoom-hint"><span>⤢</span></div>
+        <figcaption><span class="handle">dr.mai_alhakim</span><span class="tag">Medical / Aesthetics</span><a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>Behance</span></a></figcaption>
+      </figure>
+      <figure class="ba-card reveal reveal-delay-1 zoomable">
+        <img src="images/p17.jpg" alt="drsalmabargawi before and after"><div class="zoom-hint"><span>⤢</span></div>
+        <figcaption><span class="handle">drsalmabargawi</span><span class="tag">Medical / Aesthetics</span><a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>Behance</span></a></figcaption>
+      </figure>
+      <figure class="ba-card reveal zoomable">
+        <img src="images/p18.jpg" alt="marsaalamdentalclinic before and after"><div class="zoom-hint"><span>⤢</span></div>
+        <figcaption><span class="handle">marsaalamdentalclinic</span><span class="tag">Dental Clinic</span><a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>Behance</span></a></figcaption>
+      </figure>
+      <figure class="ba-card reveal reveal-delay-1 zoomable">
+        <img src="images/p19.jpg" alt="waieldaghistani before and after"><div class="zoom-hint"><span>⤢</span></div>
+        <figcaption><span class="handle">waieldaghistani</span><span class="tag">Medical Clinic</span><a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>Behance</span></a></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="statement">
+  <img src="images/p20.jpg" alt="Design philosophy statement">
+  <blockquote class="reveal">
+    The common issue across all previous accounts was the lack of a clear and consistent brand identity.
+    <b>Our approach was to build a distinctive identity from the ground up</b>, supported by a strong visual direction,
+    carefully selected colour palette, defined themes, and a unique mood that creates a recognizable and memorable brand presence.
+    <cite>— Design Philosophy</cite>
+  </blockquote>
+</section>
+
+<section id="social">
+  <div class="container">
+    <div class="eyebrow-title reveal">
+      <span class="kicker">Content</span>
+      <h2>Social Media &amp; Campaigns</h2>
+      <p style="max-width:600px; margin:18px auto 0; color:var(--muted); font-size:18px;">Selected content across tourism, medical, beauty, hospitality, automotive and marketing accounts.</p>
+    </div>
+
+    <div class="social-grid">
+      <div class="social-card reveal zoomable"><img src="images/p22.jpg" alt="Siwa campaign"><div class="zoom-hint"><span>⤢</span></div><a class="social-bh" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener" aria-label="View on Behance"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg></a><div class="label"><h4>Siwa — Mersa</h4><span>Tourism Campaign</span></div></div>
+      <div class="social-card reveal reveal-delay-1 zoomable"><img src="images/p23.jpg" alt="Salma Bargawi skincare"><div class="zoom-hint"><span>⤢</span></div><a class="social-bh" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener" aria-label="View on Behance"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg></a><div class="label"><h4>Salma Bargawi</h4><span>Skincare / Beauty Clinic</span></div></div>
+      <div class="social-card reveal reveal-delay-2 zoomable"><img src="images/p24.jpg" alt="Dr Magdy Khairallah"><div class="zoom-hint"><span>⤢</span></div><a class="social-bh" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener" aria-label="View on Behance"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg></a><div class="label"><h4>Dr. Magdy Khairallah</h4><span>Pediatric Clinic</span></div></div>
+      <div class="social-card reveal zoomable"><img src="images/p25.jpg" alt="Medical tourism campaign"><div class="zoom-hint"><span>⤢</span></div><a class="social-bh" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener" aria-label="View on Behance"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg></a><div class="label"><h4>Medical Tourism</h4><span>Travel &amp; Care Campaign</span></div></div>
+      <div class="social-card reveal reveal-delay-1 zoomable"><img src="images/p26.jpg" alt="Law firm expats campaign"><div class="zoom-hint"><span>⤢</span></div><a class="social-bh" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener" aria-label="View on Behance"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg></a><div class="label"><h4>Al Radwan Law Firm</h4><span>Legal Support for Expats</span></div></div>
+      <div class="social-card reveal reveal-delay-2 zoomable"><img src="images/p27.jpg" alt="Video trends marketing"><div class="zoom-hint"><span>⤢</span></div><a class="social-bh" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener" aria-label="View on Behance"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg></a><div class="label"><h4>Video Trends 2025</h4><span>Marketing Agency</span></div></div>
+      <div class="social-card reveal zoomable"><img src="images/p28.jpg" alt="MG Hotels & Resorts"><div class="zoom-hint"><span>⤢</span></div><a class="social-bh" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener" aria-label="View on Behance"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg></a><div class="label"><h4>MG Hotels &amp; Resorts</h4><span>Hospitality</span></div></div>
+      <div class="social-card reveal reveal-delay-1 zoomable"><img src="images/p29.jpg" alt="Al Hassan Auto Mercedes"><div class="zoom-hint"><span>⤢</span></div><a class="social-bh" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener" aria-label="View on Behance"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg></a><div class="label"><h4>Al Hassan Auto</h4><span>Automotive / Mercedes-Benz</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="container">
+    <div class="eyebrow-title reveal">
+      <span class="kicker">By The Numbers</span>
+      <h2>Results &amp; Impact</h2>
+      <p style="max-width:600px; margin:18px auto 0; color:var(--muted); font-size:18px;">A snapshot of the reach and consistency behind the work — figures to be refreshed as new campaigns close out.</p>
+    </div>
+    <div class="kpi-dash reveal">
+      <div class="kpi-feature">
+        <div class="kpi-ring" data-ring data-target="70">
+          <span class="kpi-ring-value" data-count data-target="70">0</span>
+        </div>
+        <div class="kpi-feature-copy">
+          <span class="kicker">Performance</span>
+          <h3>Growth Target Achievement</h3>
+          <p>Roughly 70% of the social pages managed hit or exceeded their growth targets over the campaign period.</p>
+        </div>
+      </div>
+      <div class="kpi-side">
+        <div class="kpi-card"><span class="kpi-number" data-count data-target="70" data-suffix="+">0</span><span class="kpi-label">Campaigns Delivered</span></div>
+        <div class="kpi-card"><span class="kpi-number" data-count data-target="40" data-suffix="+">0</span><span class="kpi-label">Brands Built</span></div>
+        <div class="kpi-card"><span class="kpi-number" data-count data-target="6">0</span><span class="kpi-label">Core Disciplines</span></div>
+        <div class="kpi-card"><span class="kpi-number" data-count data-target="4" data-suffix="+">0</span><span class="kpi-label">Years of Experience</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="eyebrow-title reveal">
+      <span class="kicker">What I Do</span>
+      <h2>Services</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal"><span class="s-num">01</span><h3>Brand Identity</h3><p>Building visual systems that give brands a recognizable personality.</p></div>
+      <div class="service-card reveal reveal-delay-1"><span class="s-num">02</span><h3>Art Direction</h3><p>Defining the visual language, mood and creative direction behind a project.</p></div>
+      <div class="service-card reveal reveal-delay-2"><span class="s-num">03</span><h3>Advertising</h3><p>Campaign concepts and visual executions designed around communication goals.</p></div>
+      <div class="service-card reveal"><span class="s-num">04</span><h3>Social Media</h3><p>Building consistent visual systems and campaign content for digital platforms.</p></div>
+      <div class="service-card reveal reveal-delay-1"><span class="s-num">05</span><h3>Visual Communication</h3><p>Turning complex messages into clear and engaging visual experiences.</p></div>
+      <div class="service-card reveal reveal-delay-2"><span class="s-num">06</span><h3>Print &amp; Production</h3><p>From concept to production-ready files.</p></div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <h3>Think Before Design</h3>
+        <p>I start with the brand, audience and objective before jumping into visuals.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-1">
+        <h3>Concept + Execution</h3>
+        <p>I can develop the direction and also execute the final design.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <h3>Adaptive</h3>
+        <p>Experience across agencies, freelance projects and different industries.</p>
+      </div>
+      <div class="why-item reveal">
+        <h3>AI + Design</h3>
+        <p>AI is used as a creative accelerator, not a replacement for design thinking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <img class="mark reveal" src="images/logo_mark.png" alt="Seif Ahmed mark">
+    <h2 class="reveal">Have an Idea?</h2>
+    <span class="gold-line reveal">Let's Make It Worth Remembering.</span>
+    <div class="hero-status reveal" style="margin-bottom:40px;"><span class="dot"></span>Available for Full-time · Freelance · Remote Opportunities</div>
+    <div class="contact-links reveal">
+      <a href="https://wa.me/201221119271" target="_blank" rel="noopener">Start a Project</a>
+      <a href="https://wa.me/201221119271" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="mailto:seiffahmedd11@gmail.com">Email Me</a>
+      <a href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener">View Behance</a>
+      <a href="https://tr.ee/G9HX7dQdcG" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.instagram.com/seif_designer17" target="_blank" rel="noopener">Instagram</a>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm">
+      <div class="cf-row">
+        <div class="cf-field"><label>Name</label><input type="text" name="name" required></div>
+        <div class="cf-field"><label>Email</label><input type="email" name="email" required></div>
+      </div>
+      <div class="cf-row">
+        <div class="cf-field"><label>Company</label><input type="text" name="company"></div>
+        <div class="cf-field"><label>Project Type</label><input type="text" name="projectType" placeholder="Branding, Campaign, Social..."></div>
+      </div>
+      <div class="cf-row">
+        <div class="cf-field"><label>Budget</label><input type="text" name="budget"></div>
+      </div>
+      <div class="cf-field"><label>Message</label><textarea name="message" rows="4" required></textarea></div>
+      <button type="submit" class="btn-primary magnetic" style="border:0; cursor:pointer; margin-top:10px;">Send Message</button>
+      <p class="cf-note">This opens your email app with the details pre-filled — nothing is sent from the site itself yet.</p>
+    </form>
+
+    <p class="fine">Thanks for watching. <a href="#top">Back to top ↑</a></p>
+  </div>
+</footer>
+
+<script>
+  // ---------- Intro splash ----------
+  (function(){
+    const splash = document.getElementById('splash');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion){
+      splash.classList.add('skip');
+      document.body.classList.remove('no-scroll');
+    } else {
+      // release scroll lock once the curtain-wipe reveal finishes
+      setTimeout(() => {
+        document.body.classList.remove('no-scroll');
+        splash.style.display = 'none';
+      }, 3150);
+    }
+  })();
+
+  // ---------- Full presentation deck viewer ----------
+  (function(){
+    const decks = {
+      heal: ['images/heal_presentation_1.jpg', 'images/heal_presentation_2.jpg'],
+      jossee: ['images/jossee_presentation_1.jpg', 'images/jossee_presentation_2.jpg', 'images/jossee_presentation_3.jpg']
+    };
+    const viewer = document.getElementById('deckViewer');
+    const scroll = document.getElementById('deckViewerScroll');
+    const closeBtn = document.getElementById('deckViewerClose');
+    if(!viewer) return;
+
+    function openDeck(key){
+      scroll.innerHTML = '';
+      (decks[key] || []).forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = key + ' full presentation';
+        img.loading = 'lazy';
+        scroll.appendChild(img);
+      });
+      viewer.scrollTop = 0;
+      viewer.classList.add('open');
+      document.body.classList.add('no-scroll');
+    }
+    function closeDeck(){
+      viewer.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    }
+    document.querySelectorAll('.deck-open').forEach(btn => {
+      btn.addEventListener('click', () => openDeck(btn.getAttribute('data-deck')));
+    });
+    closeBtn.addEventListener('click', closeDeck);
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeDeck(); });
+  })();
+
+  // ---------- Lightbox ----------
+  (function(){
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeBtn = document.getElementById('lightboxClose');
+
+    function openLightbox(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('open');
+      document.body.classList.add('no-scroll');
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    }
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+
+    document.querySelectorAll('.zoomable').forEach(el => {
+      el.addEventListener('click', (e) => {
+        if(e.target.closest('button') || e.target.closest('a')) return; // don't hijack toggle/behance links
+        let img;
+        if(el.matches('.manip-stage')){
+          img = el.classList.contains('show-concept') ? el.querySelector('img.concept') : el.querySelector('img.final');
+        } else {
+          img = el.querySelector('img');
+        }
+        if(img) openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+
+  // Nav scroll state
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // About statue — subtle parallax tied to scroll position only
+  const statueEl = document.querySelector('.about-portrait img');
+  const statueWrap = document.querySelector('.about-portrait');
+  if(statueEl && statueWrap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    let statueTicking = false;
+    const moveStatue = () => {
+      const r = statueWrap.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // progress: -1 (section below viewport) .. 0 (centered) .. 1 (section above viewport)
+      const progress = (r.top + r.height/2 - vh/2) / vh;
+      const shift = Math.max(-1, Math.min(1, progress)) * -46;
+      statueEl.style.transform = `translateY(${shift}px)`;
+      statueTicking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if(!statueTicking){
+        requestAnimationFrame(moveStatue);
+        statueTicking = true;
+      }
+    });
+    moveStatue();
+  }
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const mobilePanel = document.getElementById('mobilePanel');
+  navToggle.addEventListener('click', () => mobilePanel.classList.toggle('open'));
+  mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobilePanel.classList.remove('open')));
+
+  // Active link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav.links a');
+  const activeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(s => activeObserver.observe(s));
+
+  // Reveal on scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ---------- KPI dashboard: count-up + ring fill ----------
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const counters = document.querySelectorAll('[data-count]');
+    const rings = document.querySelectorAll('[data-ring]');
+    if(!counters.length) return;
+
+    function animateCount(el){
+      const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+      if(reduceMotion){ el.textContent = target; return; }
+      const duration = 1400;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased);
+        if(p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    function animateRing(el){
+      const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+      el.style.setProperty('--pct', reduceMotion ? target : 0);
+      if(!reduceMotion){
+        requestAnimationFrame(() => { el.style.transition = 'background 1.4s cubic-bezier(.19,1,.22,1)'; el.style.setProperty('--pct', target); });
+      }
+    }
+    const kpiObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.querySelectorAll('[data-count]').forEach(animateCount);
+          entry.target.querySelectorAll('[data-ring]').forEach(animateRing);
+          kpiObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.kpi-dash').forEach(el => kpiObserver.observe(el));
+  })();
+
+  // ---------- Scroll progress bar ----------
+  const scrollProgress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    scrollProgress.style.width = pct + '%';
+  });
+
+  // ---------- Cursor glow (soft light that follows the mouse) ----------
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouch = window.matchMedia('(hover:none)').matches || window.innerWidth < 921;
+    if(reduceMotion || isTouch) return;
+    const glow = document.getElementById('cursorGlow');
+    window.addEventListener('mousemove', (e) => {
+      glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+  })();
+
+  // ---------- Magnetic hover for nav links, buttons & Behance pills ----------
+  (function(){
+    const isTouch = window.matchMedia('(hover:none)').matches;
+    if(isTouch) return;
+    document.querySelectorAll('.magnetic, nav.links a, .manip-toggle, .contact-links a').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width/2;
+        const y = e.clientY - r.top - r.height/2;
+        el.style.transform = `translate(${x*0.28}px, ${y*0.35}px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  })();
+
+  // ---------- 3D tilt for project figures & cards ----------
+  (function(){
+    const isTouch = window.matchMedia('(hover:none)').matches;
+    if(isTouch) return;
+    document.querySelectorAll('.project-figure, .ba-card, .social-card, .manip-stage').forEach(el => {
+      el.classList.add('tilt');
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `perspective(900px) rotateX(${py * -7}deg) rotateY(${px * 7}deg) scale3d(1.02,1.02,1.02)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+      });
+    });
+  })();
+
+  // ---------- Contact form: build a pre-filled mailto (no backend available) ----------
+  (function(){
+    const form = document.getElementById('contactForm');
+    if(!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = data.get('name') || '';
+      const email = data.get('email') || '';
+      const company = data.get('company') || '';
+      const projectType = data.get('projectType') || '';
+      const budget = data.get('budget') || '';
+      const message = data.get('message') || '';
+      const subject = encodeURIComponent(`New project inquiry — ${name}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nProject Type: ${projectType}\nBudget: ${budget}\n\nMessage:\n${message}`
+      );
+      window.location.href = `mailto:seiffahmedd11@gmail.com?subject=${subject}&body=${body}`;
+    });
+  })();
+
+  // Photo manipulation process toggle
+  document.querySelectorAll('[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const stage = btn.closest('.manip-item').querySelector('[data-stage]');
+      const label = stage.querySelector('[data-stage-label]');
+      const showingConcept = stage.classList.toggle('show-concept');
+      if(showingConcept){
+        label.textContent = 'CONCEPT';
+        btn.textContent = 'View Final Piece';
+      } else {
+        label.textContent = 'FINAL';
+        btn.textContent = 'View Concept Stage';
+      }
+    });
+  });
+</script>
+</body>
+</html>
