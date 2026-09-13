@@ -487,56 +487,89 @@
     .why-grid{ grid-template-columns:1fr; }
   }
 
-  /* ---------- KPI dashboard ---------- */
+  /* ---------- KPI dashboard (bento widget style) ---------- */
   .kpi-dash{
-    display:grid; grid-template-columns: 1fr 1.15fr; gap:2px;
-    background:var(--line); border:1px solid var(--line);
+    display:grid; grid-template-columns: 1fr 1.15fr; gap:18px;
+    background:transparent; border:none;
   }
   .kpi-feature{
-    background:var(--panel); padding:56px 48px; display:flex; align-items:center; gap:40px;
+    background:var(--panel);
+    padding:40px 44px; display:flex; align-items:center; gap:36px;
+    border-radius:24px;
+    border:1px solid var(--line);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+    opacity:0; transform:translateY(34px);
+    transition:opacity .9s cubic-bezier(.19,1,.22,1), transform .9s cubic-bezier(.19,1,.22,1), border-color .4s ease, box-shadow .4s ease;
+    will-change:transform;
   }
+  .kpi-dash.in-view .kpi-feature{ opacity:1; transform:translateY(0); }
+  .kpi-feature:hover{ border-color:rgba(240,168,63,0.4); box-shadow:0 34px 90px -18px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.03); }
   .kpi-ring{
-    position:relative; width:168px; height:168px; flex:0 0 auto; border-radius:50%;
-    background:conic-gradient(var(--gold) calc(var(--pct,0) * 1%), rgba(160,190,230,0.12) 0);
+    position:relative; width:150px; height:150px; flex:0 0 auto; border-radius:50%;
+    background:conic-gradient(from -90deg, var(--blue-glow) 0%, var(--gold) calc(var(--pct,0) * 1%), rgba(160,190,230,0.1) 0);
     display:flex; align-items:center; justify-content:center;
     transition: background 1.4s cubic-bezier(.19,1,.22,1);
+    box-shadow:0 0 0 1px var(--line);
   }
   .kpi-ring::before{
-    content:""; position:absolute; inset:12px; border-radius:50%; background:var(--panel);
+    content:""; position:absolute; inset:11px; border-radius:50%; background:var(--panel);
   }
   .kpi-ring-value{
     position:relative; z-index:2; font-family:'Space Grotesk', sans-serif; font-weight:700;
-    font-size:34px; color:var(--ink);
+    font-size:32px; color:var(--ink);
   }
-  .kpi-ring-value::after{ content:"%"; font-size:19px; color:var(--gold-soft); }
+  .kpi-ring-value::after{ content:"%"; font-size:18px; color:var(--gold-soft); }
   .kpi-feature-copy .kicker{
     font-family:'Space Grotesk', sans-serif; font-size:11px; letter-spacing:0.28em; color:var(--gold);
     display:block; margin-bottom:12px;
   }
-  .kpi-feature-copy h3{ font-size:24px; color:#f2f5fb; margin-bottom:10px; }
-  .kpi-feature-copy p{ color:var(--muted); font-size:17px; margin:0; }
+  .kpi-feature-copy h3{ font-size:22px; color:#f2f5fb; margin-bottom:10px; }
+  .kpi-feature-copy p{ color:var(--muted); font-size:16px; margin:0; }
   .kpi-side{
-    background:var(--panel); display:grid; grid-template-columns:1fr 1fr; gap:2px;
+    background:transparent; display:grid; grid-template-columns:1fr 1fr; gap:16px;
   }
   .kpi-card{
-    background:var(--panel-2); padding:36px 30px; display:flex; flex-direction:column; justify-content:center;
+    position:relative; overflow:hidden;
+    background:var(--panel); padding:26px 24px 22px; display:flex; flex-direction:column; justify-content:center;
+    border-radius:20px;
+    border:1px solid var(--line);
+    box-shadow:0 20px 50px -28px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+    opacity:0; transform:translateY(34px) scale(.97);
+    transition:opacity .8s cubic-bezier(.19,1,.22,1), transform .8s cubic-bezier(.19,1,.22,1), border-color .4s ease, box-shadow .4s ease;
+    will-change:transform;
   }
+  .kpi-card .kpi-icon{
+    width:34px; height:34px; border-radius:11px; margin-bottom:16px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(240,168,63,0.12); color:var(--gold-soft);
+  }
+  .kpi-card .kpi-icon svg{ width:17px; height:17px; }
+  .kpi-dash.in-view .kpi-card{ opacity:1; transform:translateY(0) scale(1); }
+  .kpi-dash.in-view .kpi-card:nth-child(1){ transition-delay:.06s; }
+  .kpi-dash.in-view .kpi-card:nth-child(2){ transition-delay:.16s; }
+  .kpi-dash.in-view .kpi-card:nth-child(3){ transition-delay:.26s; }
+  .kpi-dash.in-view .kpi-card:nth-child(4){ transition-delay:.36s; }
+  .kpi-card:hover{ border-color:rgba(240,168,63,0.4); box-shadow:0 24px 60px -22px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03); }
   .kpi-number{
-    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(34px,3.6vw,46px);
-    color:var(--gold-soft); line-height:1;
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(30px,3.2vw,40px);
+    color:var(--ink); line-height:1;
   }
-  .kpi-number::after{ content:attr(data-suffix); }
-  .kpi-label{ margin-top:10px; color:var(--muted); font-size:15px; letter-spacing:0.02em; }
+  .kpi-number::after{ content:attr(data-suffix); color:var(--gold-soft); }
+  .kpi-label{ margin-top:8px; color:var(--muted); font-size:14px; letter-spacing:0.02em; }
   @media (max-width:860px){
     .kpi-dash{ grid-template-columns:1fr; }
-    .kpi-feature{ flex-direction:column; text-align:center; padding:44px 30px; }
+    .kpi-feature{ flex-direction:column; text-align:center; padding:40px 30px; }
   }
   @media (max-width:520px){
     .kpi-side{ grid-template-columns:1fr; }
   }
+  @media (prefers-reduced-motion: reduce){
+    .kpi-feature, .kpi-card{ transform:none !important; }
+  }
 
   /* ---------- Full presentation decks ---------- */
   .deck-grid{ display:grid; grid-template-columns:1fr 1fr; gap:44px; }
+  .deck-grid:has(> .deck-card:only-child){ grid-template-columns:1fr; max-width:640px; margin:0 auto; }
   .deck-card{ border:1px solid var(--line); box-shadow:var(--shadow); overflow:hidden; background:var(--panel); }
   .deck-preview{ height:420px; overflow:hidden; position:relative; }
   .deck-preview img{ width:100%; height:100%; object-fit:cover; object-position:top; transition:transform .8s cubic-bezier(.19,1,.22,1); }
@@ -632,76 +665,71 @@
   .mobile-panel.open{ transform:translateY(0); }
   .mobile-panel a{ font-family:'Space Grotesk', sans-serif; font-size:20px; letter-spacing:0.14em; color:var(--ink); }
 
-  /* ---------- Intro splash: curtain wipe + masked wordmark reveal ---------- */
+  /* ---------- Intro splash: star burst → logo assemble ---------- */
   .splash{
     position:fixed; inset:0; z-index:300;
     background:var(--bg-deep);
     display:flex; align-items:center; justify-content:center;
     overflow:hidden;
+    transition:opacity .6s ease;
   }
   .splash.skip{ animation:none; display:none; }
+  .splash.fade-out{ opacity:0; pointer-events:none; }
 
-  .splash-curtain{
-    position:absolute; top:0; bottom:0; width:51%; z-index:2;
-    background:
-      radial-gradient(120% 140% at 50% 50%, rgba(90,130,190,0.14), transparent 60%),
-      var(--bg-deep);
+  .splash-field{ position:absolute; inset:0; }
+  .splash-star{
+    position:absolute; left:50%; top:50%; width:16px; height:16px; margin:-8px 0 0 -8px;
+    opacity:0; color:var(--gold-soft);
+    transform: translate(0,0) scale(0) rotate(0deg);
+    animation: starFly 2.1s cubic-bezier(.22,.8,.25,1) forwards;
   }
-  .splash-curtain.cl{ left:0; border-right:1px solid var(--line); animation-name: curtainOpenLeft; }
-  .splash-curtain.cr{ right:0; border-left:1px solid var(--line); animation-name: curtainOpenRight; }
-  .splash-curtain.cl, .splash-curtain.cr{
-    animation-duration: 3.1s; animation-timing-function: cubic-bezier(.76,0,.16,1); animation-fill-mode:forwards;
+  .splash-star svg{ width:100%; height:100%; filter:drop-shadow(0 0 4px rgba(240,168,63,0.7)); }
+  @keyframes starFly{
+    0%{   opacity:0; transform: translate(0,0) scale(0) rotate(0deg); }
+    8%{   opacity:1; }
+    38%{  opacity:1; transform: translate(var(--bx), var(--by)) scale(1) rotate(var(--r1)); }
+    46%{  opacity:1; }
+    100%{ opacity:0; transform: translate(var(--tx), var(--ty)) scale(.35) rotate(var(--r2)); }
   }
-  @keyframes curtainOpenLeft{
-    0%,72%{ transform:translateX(0); }
-    100%{ transform:translateX(-100%); }
+
+  .splash-flash{
+    position:absolute; left:50%; top:50%; width:10px; height:10px; margin:-5px 0 0 -5px;
+    border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.9), rgba(240,168,63,0) 70%);
+    opacity:0; transform:scale(0);
+    animation: splashFlashPulse 1s ease 1.4s forwards;
   }
-  @keyframes curtainOpenRight{
-    0%,72%{ transform:translateX(0); }
-    100%{ transform:translateX(100%); }
+  @keyframes splashFlashPulse{
+    0%{ opacity:0; transform:scale(0); }
+    30%{ opacity:1; transform:scale(16); }
+    100%{ opacity:0; transform:scale(22); }
   }
 
   .splash-center{
     position:relative; z-index:3; display:flex; flex-direction:column; align-items:center;
-    animation: splashCenterOut .7s cubic-bezier(.7,0,.2,1) 2.15s forwards;
   }
-  @keyframes splashCenterOut{
-    to{ opacity:0; transform:translateY(-16px) scale(.97); }
-  }
-  .splash-word-line{ overflow:hidden; }
-  .splash-word-line .sw-text{
-    display:block; font-family:'Space Grotesk', sans-serif; font-weight:600;
-    font-size:clamp(34px, 6vw, 62px); line-height:1.08; letter-spacing:0.05em;
-    color:#f3f6fc;
-    transform:translateY(112%);
-    animation: swReveal 1s cubic-bezier(.16,1,.3,1) forwards;
-  }
-  .splash-word-line:nth-child(2) .sw-text{ color:var(--gold-soft); animation-delay:.12s; }
-  @keyframes swReveal{ to{ transform:translateY(0); } }
-
   .splash-logo{
-    width:clamp(150px, 22vw, 220px);
-    opacity:0; transform:scale(.88);
-    animation: splashLogoIn 1.15s cubic-bezier(.16,1,.3,1) .1s forwards;
-    filter:drop-shadow(0 0 26px rgba(150,190,255,0.28));
+    width:clamp(72px, 9vw, 96px);
+    opacity:0; transform:scale(.6);
+    filter:drop-shadow(0 0 22px rgba(240,168,63,0.55));
+    animation: splashLogoIn .8s cubic-bezier(.19,1,.22,1) 1.55s forwards;
   }
-  .splash-logo img{ width:100%; }
+  .splash-logo img{ width:100%; display:block; }
   @keyframes splashLogoIn{ to{ opacity:1; transform:scale(1); } }
 
+  .splash-word-line{ overflow:hidden; margin-top:16px; }
+  .splash-word-line .sw-text{
+    display:block; font-family:'Fraunces', serif; font-weight:600;
+    font-size:clamp(26px, 4vw, 34px); line-height:1.1; letter-spacing:0.01em;
+    color:#f3f6fc;
+    transform:translateY(112%);
+    animation: swReveal .8s cubic-bezier(.16,1,.3,1) 1.95s forwards;
+  }
+  @keyframes swReveal{ to{ transform:translateY(0); } }
+
   .splash-role{
-    margin-top:20px; font-family:'Space Grotesk', sans-serif; font-size:11px; letter-spacing:0.36em; color:var(--muted-2);
-    opacity:0; animation: splashFadeIn .8s ease .85s forwards;
+    margin-top:10px; font-family:'Space Grotesk', sans-serif; font-size:11px; letter-spacing:0.34em; color:var(--muted-2);
+    opacity:0; animation: splashFadeIn .6s ease 2.3s forwards;
   }
-  .splash-progress{
-    margin-top:30px; width:160px; height:1px; background:rgba(160,190,230,0.16); position:relative; overflow:hidden;
-    opacity:0; animation: splashFadeIn .5s ease .55s forwards;
-  }
-  .splash-progress-fill{
-    position:absolute; left:0; top:0; bottom:0; width:0%;
-    background:linear-gradient(90deg, var(--gold-soft), var(--gold));
-    animation: splashProgress 1.5s cubic-bezier(.65,0,.35,1) .6s forwards;
-  }
-  @keyframes splashProgress{ to{ width:100%; } }
   @keyframes splashFadeIn{ to{ opacity:1; } }
 
   .no-scroll{ overflow:hidden; height:100%; }
@@ -831,12 +859,12 @@
 
 
 <div class="splash" id="splash">
-  <div class="splash-curtain cl"></div>
-  <div class="splash-curtain cr"></div>
+  <div class="splash-field" id="splashField"></div>
+  <div class="splash-flash"></div>
   <div class="splash-center">
-    <div class="splash-logo"><img src="images/logo_full.png" alt="Seif Ahmed"></div>
-    <div class="splash-progress"><span class="splash-progress-fill"></span></div>
-    <span class="splash-role">Brand &amp; Creative Designer</span>
+    <div class="splash-logo"><img src="images/logo_mark.png" alt="Seif Ahmed"></div>
+    <div class="splash-word-line"><span class="sw-text">Seif Ahmed</span></div>
+    <span class="splash-role">Graphic Designer &amp; Illustrator</span>
   </div>
 </div>
 
@@ -874,9 +902,9 @@
 <section class="hero">
   <img class="hero-bg" src="images/p01.jpg" alt="Seif Ahmed portrait">
   <div class="hero-content">
-    <span class="hero-eyebrow">Seif Ahmed</span>
-    <h1><span class="split-word"><span style="animation-delay:.15s">Brand</span></span> <span class="split-word"><span style="animation-delay:.28s">&amp;</span></span><br><span class="split-word"><span style="animation-delay:.4s">Creative</span></span> <span class="split-word"><span style="animation-delay:.52s">Designer.</span></span></h1>
-    <p class="tagline">I build visual identities, campaigns and creative systems that give brands a recognizable point of view.</p>
+    <span class="hero-eyebrow">Seif Ahmed — Graphic Designer</span>
+    <h1><span class="split-word"><span style="animation-delay:.15s">Ideas,</span></span> <span class="split-word"><span style="animation-delay:.28s">Given</span></span><br><span class="split-word"><span style="animation-delay:.4s">Visual</span></span> <span class="split-word"><span style="animation-delay:.52s">Form.</span></span></h1>
+    <p class="tagline">I'm a graphic designer who turns ideas into logos, identities and visual systems that give brands a voice worth noticing.</p>
     <div class="hero-status"><span class="dot"></span>Available for Full-time · Freelance · Remote Opportunities</div>
     <div class="hero-cta">
       <a href="#work" class="btn-primary magnetic">View Selected Work</a>
@@ -1009,16 +1037,6 @@
       </div>
     </div>
 
-    <div class="project-row flip reveal">
-      <div class="project-figure zoomable"><img src="images/p07.jpg" alt="Jossee Coffee branding"><div class="zoom-hint"><span>⤢</span></div></div>
-      <div class="project-copy">
-        <div class="num">04</div>
-        <h3>Jossee Coffee</h3>
-        <p>Coffee brand identity "crafted to inspire" — logo marks, packaging for whole-bean bags, cup and signage mockups, mobile app UI, social templates and a motion graphic concept in a warm terracotta and forest palette.</p>
-        <div class="tags"><span>Packaging</span><span>Signage</span><span>Social Templates</span></div>
-        <a class="behance-link magnetic" href="https://www.behance.net/seifahmed98" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M2 5h9M2 12h7.5a3 3 0 0 1 0 6H2V5h6a3 3 0 0 1 0 6"/><path d="M14 15c1 2 5 2 6 0M14 12c0-2 1.5-3.5 3.5-3.5S21 10 21 12h-7Z"/></svg><span>View on Behance</span></a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1027,7 +1045,7 @@
     <div class="eyebrow-title reveal">
       <span class="kicker">Deep Dive</span>
       <h2>Full Case Study Presentations</h2>
-      <p style="max-width:600px; margin:18px auto 0; color:var(--muted); font-size:18px;">The complete process decks for two projects — concept, thinking and execution, end to end.</p>
+      <p style="max-width:600px; margin:18px auto 0; color:var(--muted); font-size:18px;">The complete process deck — concept, thinking and execution, end to end.</p>
     </div>
     <div class="deck-grid">
       <div class="deck-card reveal">
@@ -1036,14 +1054,6 @@
           <h3>Here to Heal</h3>
           <span>Full Concept &amp; Identity Deck</span>
           <button class="deck-open magnetic" data-deck="heal">View Full Presentation</button>
-        </div>
-      </div>
-      <div class="deck-card reveal reveal-delay-1">
-        <div class="deck-preview"><img src="images/jossee_presentation_1.jpg" alt="Jossee Coffee full presentation preview"></div>
-        <div class="deck-caption">
-          <h3>Jossee Coffee</h3>
-          <span>Full Brand &amp; Mockup Deck</span>
-          <button class="deck-open magnetic" data-deck="jossee">View Full Presentation</button>
         </div>
       </div>
     </div>
@@ -1184,10 +1194,10 @@
         </div>
       </div>
       <div class="kpi-side">
-        <div class="kpi-card"><span class="kpi-number" data-count data-target="70" data-suffix="+">0</span><span class="kpi-label">Campaigns Delivered</span></div>
-        <div class="kpi-card"><span class="kpi-number" data-count data-target="40" data-suffix="+">0</span><span class="kpi-label">Brands Built</span></div>
-        <div class="kpi-card"><span class="kpi-number" data-count data-target="6">0</span><span class="kpi-label">Core Disciplines</span></div>
-        <div class="kpi-card"><span class="kpi-number" data-count data-target="4" data-suffix="+">0</span><span class="kpi-label">Years of Experience</span></div>
+        <div class="kpi-card"><span class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span><span class="kpi-number" data-count data-target="70" data-suffix="+">0</span><span class="kpi-label">Campaigns Delivered</span></div>
+        <div class="kpi-card"><span class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/><path d="M9 21h6"/></svg></span><span class="kpi-number" data-count data-target="40" data-suffix="+">0</span><span class="kpi-label">Brands Built</span></div>
+        <div class="kpi-card"><span class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span class="kpi-number" data-count data-target="6">0</span><span class="kpi-label">Core Disciplines</span></div>
+        <div class="kpi-card"><span class="kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><span class="kpi-number" data-count data-target="4" data-suffix="+">0</span><span class="kpi-label">Years of Experience</span></div>
       </div>
     </div>
   </div>
@@ -1266,27 +1276,67 @@
 </footer>
 
 <script>
-  // ---------- Intro splash ----------
+  // ---------- Intro splash: star burst → logo assemble ----------
   (function(){
     const splash = document.getElementById('splash');
+    const field = document.getElementById('splashField');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     if(reduceMotion){
       splash.classList.add('skip');
       document.body.classList.remove('no-scroll');
-    } else {
-      // release scroll lock once the curtain-wipe reveal finishes
-      setTimeout(() => {
-        document.body.classList.remove('no-scroll');
-        splash.style.display = 'none';
-      }, 3150);
+      return;
     }
+
+    const STAR_COUNT = 26;
+    const starSVG = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l2.6 7.6L22 12l-7.4 3.4L12 23l-2.6-7.6L2 12l7.4-3.4L12 1z"/></svg>';
+    const rand = (min, max) => Math.random() * (max - min) + min;
+
+    for(let i = 0; i < STAR_COUNT; i++){
+      const el = document.createElement('div');
+      el.className = 'splash-star';
+      el.innerHTML = starSVG;
+
+      const angle = rand(0, Math.PI * 2);
+      const burstDist = rand(90, 220);
+      const bx = Math.cos(angle) * burstDist;
+      const by = Math.sin(angle) * burstDist * 0.72;
+
+      // convergence target: scattered within the logo mark's rough silhouette
+      const tAngle = rand(0, Math.PI * 2);
+      const tRadius = rand(4, 26);
+      const tx = Math.cos(tAngle) * tRadius;
+      const ty = Math.sin(tAngle) * tRadius * 1.3 - 6;
+
+      el.style.setProperty('--bx', bx.toFixed(1) + 'px');
+      el.style.setProperty('--by', by.toFixed(1) + 'px');
+      el.style.setProperty('--tx', tx.toFixed(1) + 'px');
+      el.style.setProperty('--ty', ty.toFixed(1) + 'px');
+      el.style.setProperty('--r1', rand(-160, 160).toFixed(0) + 'deg');
+      el.style.setProperty('--r2', rand(-60, 60).toFixed(0) + 'deg');
+      el.style.animationDelay = rand(0, 0.35).toFixed(2) + 's';
+      const size = rand(8, 18);
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      el.style.marginLeft = (-size / 2) + 'px';
+      el.style.marginTop = (-size / 2) + 'px';
+      if(Math.random() > 0.6){ el.style.color = '#eef1f8'; }
+
+      field.appendChild(el);
+    }
+
+    // release scroll lock once the reveal finishes, then fade the splash out
+    setTimeout(() => {
+      document.body.classList.remove('no-scroll');
+      splash.classList.add('fade-out');
+      setTimeout(() => { splash.style.display = 'none'; }, 650);
+    }, 2750);
   })();
 
   // ---------- Full presentation deck viewer ----------
   (function(){
     const decks = {
-      heal: ['images/heal_presentation_1.jpg', 'images/heal_presentation_2.jpg'],
-      jossee: ['images/jossee_presentation_1.jpg', 'images/jossee_presentation_2.jpg', 'images/jossee_presentation_3.jpg']
+      heal: ['images/heal_presentation_1.jpg', 'images/heal_presentation_2.jpg']
     };
     const viewer = document.getElementById('deckViewer');
     const scroll = document.getElementById('deckViewerScroll');
@@ -1487,7 +1537,7 @@
   (function(){
     const isTouch = window.matchMedia('(hover:none)').matches;
     if(isTouch) return;
-    document.querySelectorAll('.project-figure, .ba-card, .social-card, .manip-stage').forEach(el => {
+    document.querySelectorAll('.project-figure, .ba-card, .social-card, .manip-stage, .kpi-card').forEach(el => {
       el.classList.add('tilt');
       el.addEventListener('mousemove', (e) => {
         const r = el.getBoundingClientRect();
